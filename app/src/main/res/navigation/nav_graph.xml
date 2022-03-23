@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/jogoFragment">
+
+    <fragment
+        android:id="@+id/inicioFragment"
+        android:name="br.senai.sp.cotia.jogodavelha.fragment.InicioFragment"
+        android:label="fragment_inicio"
+        tools:layout="@layout/fragment_inicio" >
+        <action
+            android:id="@+id/action_inicioFragment_to_jogoFragment"
+            app:destination="@id/jogoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/jogoFragment"
+        android:name="br.senai.sp.cotia.jogodavelha.fragment.JogoFragment"
+        android:label="fragment_jogo"
+        tools:layout="@layout/fragment_jogo" >
+        <action
+            android:id="@+id/action_jogoFragment_to_inicioFragment"
+            app:destination="@id/inicioFragment" />
+        <action
+            android:id="@+id/action_jogoFragment_to_prefFragment"
+            app:destination="@id/prefFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/prefFragment"
+        android:name="br.senai.sp.cotia.jogodavelha.fragment.PrefFragment"
+        android:label="fragment_pref"
+        tools:layout="@layout/fragment_pref" />
+</navigation>
