@@ -8,13 +8,13 @@
     tools:context=".fragment.JogoFragment">
 
     <LinearLayout
+        android:id="@+id/linearLayoutPrim"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="10dp"
+        android:orientation="horizontal"
         android:padding="10dp"
-        android:id="@+id/linearLayoutPrim">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -27,9 +27,10 @@
             android:padding="20dp"
             app:layout_constraintEnd_toStartOf="@+id/linearLayout2"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" >
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
+                android:id="@+id/text1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -38,6 +39,7 @@
                 android:textColor="@color/white" />
 
             <TextView
+                android:id="@+id/placar_um"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -52,8 +54,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="1dp"
             android:layout_weight="1"
-            android:orientation="vertical"
             android:background="@drawable/placar_border_radius"
+            android:orientation="vertical"
 
             android:padding="20dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -61,14 +63,16 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
+                android:id="@+id/text2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Jogador 1 [ O ] ="
+                android:text="Jogador 2 [ O ] ="
                 android:textAlignment="center"
                 android:textColor="@color/white" />
 
             <TextView
+                android:id="@+id/placar_dois"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -93,21 +97,24 @@
                 android:layout_width="0dp"
                 android:layout_height="150dp"
                 android:layout_margin="5dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/bt01"
                 android:layout_width="0dp"
                 android:layout_height="150dp"
                 android:layout_margin="5dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/bt02"
                 android:layout_width="0dp"
                 android:layout_height="150dp"
                 android:layout_margin="5dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:textSize="20sp" />
 
         </TableRow>
 
@@ -120,21 +127,24 @@
                 android:layout_width="0dp"
                 android:layout_height="150dp"
                 android:layout_margin="5dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/bt11"
                 android:layout_width="0dp"
                 android:layout_height="150dp"
                 android:layout_margin="5dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/bt12"
                 android:layout_width="0dp"
                 android:layout_height="150dp"
                 android:layout_margin="5dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:textSize="20sp" />
 
         </TableRow>
 
@@ -147,21 +157,24 @@
                 android:layout_width="0dp"
                 android:layout_height="150dp"
                 android:layout_margin="5dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/bt21"
                 android:layout_width="0dp"
                 android:layout_height="150dp"
                 android:layout_margin="5dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/bt22"
                 android:layout_width="0dp"
                 android:layout_height="150dp"
                 android:layout_margin="5dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:textSize="20sp" />
 
         </TableRow>
     </TableLayout>
