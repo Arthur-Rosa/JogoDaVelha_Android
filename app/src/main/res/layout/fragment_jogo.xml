@@ -34,7 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Jogador 1 [ X ] ="
+                android:text="@string/jogador_1"
                 android:textAlignment="center"
                 android:textColor="@color/white" />
 
@@ -67,7 +67,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Jogador 2 [ O ] ="
+                android:text="@string/jogador_2"
                 android:textAlignment="center"
                 android:textColor="@color/white" />
 

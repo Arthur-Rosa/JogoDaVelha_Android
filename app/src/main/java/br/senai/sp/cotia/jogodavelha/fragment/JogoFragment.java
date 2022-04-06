@@ -3,10 +3,15 @@ package br.senai.sp.cotia.jogodavelha.fragment;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -19,6 +24,7 @@ import java.util.Random;
 
 import br.senai.sp.cotia.jogodavelha.R;
 import br.senai.sp.cotia.jogodavelha.databinding.FragmentJogoBinding;
+import br.senai.sp.cotia.jogodavelha.util.PrefsUtil;
 
 public class JogoFragment extends Fragment {
     // variavel para acessar os elementos da View
@@ -33,10 +39,14 @@ public class JogoFragment extends Fragment {
     private Random random;
     // variavel para controlar numero de jogadas
     private int numJogadas = 0;
+    // variaveis para o placar
+    private int placarJog1 = 0, placarJog2 = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // habilitar o menu
+        setHasOptionsMenu(true);
 
         // instanciando o binding
         binding = FragmentJogoBinding.inflate(inflater, container, false);
@@ -54,8 +64,11 @@ public class JogoFragment extends Fragment {
         }
 
         // define o simbolos dos jogadores 1 e 2
-        simbJog1 = "X";
-        simbJog2 = "O";
+        simbJog1 = PrefsUtil.getSimboloJog1(getContext());
+        simbJog2 = PrefsUtil.getSimboloJog2(getContext());
+
+        binding.text1.setText(getResources().getString(R.string.jogador_1,simbJog1));
+        binding.text2.setText(getResources().getString(R.string.jogador_2,simbJog2));
 
         // instanciar o random
         random = new Random();
@@ -87,6 +100,11 @@ public class JogoFragment extends Fragment {
         return binding.getRoot();
     }
 
+    private void atualizaPlacar(){
+        binding.placarUm.setText(placarJog1+"");
+        binding.placarDois.setText(placarJog2+"");
+    }
+
     private void sorteia() {
         // se gerar um valor verdadeiro jogador 1 começa
         // caso contrario jogador 2 começa
@@ -110,10 +128,15 @@ public class JogoFragment extends Fragment {
 
         numJogadas = 0;
 
+        sorteia();
+        atualizaVez();
     }
 
     private void atualizaVez() {
+
         if (simbolo.equals(simbJog1)) {
+            // simbolo = simbJog2;
+
             binding.linearLayout.setBackgroundColor(getResources().getColor(R.color.gray));
             binding.linearLayout2.setBackgroundColor(getResources().getColor(R.color.black));
 
@@ -122,6 +145,8 @@ public class JogoFragment extends Fragment {
             binding.placarUm.setTextColor(getResources().getColor(R.color.black));
             binding.placarDois.setTextColor(getResources().getColor(R.color.white));
         } else {
+            // simbolo = simbJog1;
+
             binding.text1.setTextColor(getResources().getColor(R.color.white));
             binding.text2.setTextColor(getResources().getColor(R.color.black));
             binding.placarUm.setTextColor(getResources().getColor(R.color.white));
@@ -155,7 +180,114 @@ public class JogoFragment extends Fragment {
         }
         return false;
     }
+/*
+    public void vezDoRobo() {
+        Log.w("entrou", "na vez do robo");
+        Random r = new Random();
+        numJogadas += 1;
+        simbolo = "O";
+        boolean z = false;
 
+        while (z != true) {
+            int linha = r.nextInt(3);
+            int coluna = r.nextInt(3);
+
+            if (tabuleiro[linha][coluna].equals(simbolo)) {
+                Log.w("robo ja tem", "ja tem ja tem ja tem");
+                z = false;
+            } else {
+
+
+
+                tabuleiro[linha][coluna] = simbolo;
+
+                botoes[0] = binding.bt00;
+                botoes[1] = binding.bt01;
+                botoes[2] = binding.bt02;
+                botoes[3] = binding.bt10;
+                botoes[4] = binding.bt11;
+                botoes[5] = binding.bt12;
+                botoes[6] = binding.bt20;
+                botoes[7] = binding.bt21;
+                botoes[8] = binding.bt22;
+
+                if (tabuleiro[linha][coluna] == tabuleiro[0][0] && botoes[0].getText().equals("")) {
+                    Button botao = botoes[0];
+                    botao.setText(simbolo);
+                    botao.setTextColor(Color.BLACK);
+                    botao.setBackgroundColor(Color.RED);
+                    botao.setClickable(false);
+
+                    z = true;
+                } else if (tabuleiro[linha][coluna] == tabuleiro[0][1] && botoes[1].getText().equals("")) {
+                    Button botao = botoes[1];
+                    botao.setText(simbolo);
+                    botao.setTextColor(Color.BLACK);
+                    botao.setBackgroundColor(Color.RED);
+                    botao.setClickable(false);
+
+                    z = true;
+                } else if (tabuleiro[linha][coluna] == tabuleiro[0][2] && botoes[2].getText().equals("")) {
+                    Button botao = botoes[2];
+                    botao.setText(simbolo);
+                    botao.setTextColor(Color.BLACK);
+                    botao.setBackgroundColor(Color.RED);
+                    botao.setClickable(false);
+
+                    z = true;
+                } else if (tabuleiro[linha][coluna] == tabuleiro[1][0] && botoes[3].getText().equals("")) {
+                    Button botao = botoes[3];
+                    botao.setText(simbolo);
+                    botao.setTextColor(Color.BLACK);
+                    botao.setBackgroundColor(Color.RED);
+                    botao.setClickable(false);
+
+                    z = true;
+                } else if (tabuleiro[linha][coluna] == tabuleiro[1][1] && botoes[4].getText().equals("")) {
+                    Button botao = botoes[4];
+                    botao.setText(simbolo);
+                    botao.setTextColor(Color.BLACK);
+                    botao.setBackgroundColor(Color.RED);
+                    botao.setClickable(false);
+
+                    z = true;
+                } else if (tabuleiro[linha][coluna] == tabuleiro[1][2] && botoes[5].getText().equals("")) {
+                    Button botao = botoes[5];
+                    botao.setText(simbolo);
+                    botao.setTextColor(Color.BLACK);
+                    botao.setBackgroundColor(Color.RED);
+                    botao.setClickable(false);
+
+                    z = true;
+                } else if (tabuleiro[linha][coluna] == tabuleiro[2][0] && botoes[6].getText().equals("")) {
+                    Button botao = botoes[6];
+                    botao.setText(simbolo);
+                    botao.setTextColor(Color.BLACK);
+                    botao.setBackgroundColor(Color.RED);
+                    botao.setClickable(false);
+
+                    z = true;
+                } else if (tabuleiro[linha][coluna] == tabuleiro[2][1] && botoes[7].getText().equals("")) {
+                    Button botao = botoes[7];
+                    botao.setText(simbolo);
+                    botao.setTextColor(Color.BLACK);
+                    botao.setBackgroundColor(Color.RED);
+                    botao.setClickable(false);
+
+                    z = true;
+                } else if (tabuleiro[linha][coluna] == tabuleiro[2][2] && botoes[8].getText().equals("")) {
+                    Button botao = botoes[8];
+                    botao.setText(simbolo);
+                    botao.setTextColor(Color.BLACK);
+                    botao.setBackgroundColor(Color.RED);
+                    botao.setClickable(false);
+
+                    z = true;
+                }
+            }
+        }
+    }
+*/
     private View.OnClickListener listenerBotoes = btPress -> {
         // incrementa numero de jogadas
         numJogadas++;
@@ -180,10 +312,18 @@ public class JogoFragment extends Fragment {
         // desabilita botao que foi jogado
         botao.setClickable(false);
 
-        // verifica se venceu
-        if (numJogadas >= 5 && venceu()) {
+        if (numJogadas >= 0 && venceu()) {
+
             // informa que houve um vencedor
-            Toast.makeText(getContext(), R.string.venceu, Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), R.string.venceu, Toast.LENGTH_SHORT).show();
+
+            if(simbolo.equals(simbJog1)){
+                placarJog1++;
+            } else {
+                placarJog2++;
+            }
+            // atualiza placar
+            atualizaPlacar();
             // reseta
             reseta();
         } else if (numJogadas == 9) {
@@ -192,11 +332,33 @@ public class JogoFragment extends Fragment {
             // reseta
             reseta();
         } else {
-            // inverte o simbolo
             simbolo = simbolo.equals(simbJog1) ? simbJog2 : simbJog1;
-
-            // atualiza vez
             atualizaVez();
         }
     };
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_main, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        // verificar qual opção foi selecionada
+        switch (item.getItemId()){
+            // caso seja o opção de resetar
+            case R.id.menu_resetar:
+                placarJog2 = 0;
+                placarJog1 = 0;
+                atualizaPlacar();
+                reseta();
+                break;
+            // caso seja a opção de preferencias
+            case R.id.menu_pref:
+                NavHostFragment.findNavController(JogoFragment.this).navigate(R.id.action_jogoFragment_to_prefFragment);
+                break;
+        }
+
+        return true;
+    }
 }

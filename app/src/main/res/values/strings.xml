@@ -4,5 +4,15 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="venceu">Parabéns ! você venceu</string>
+    <string name="perdeu">Você perdeu ! </string>
     <string name="deuvelha">Oops! deu velha...</string>
+    <string name="resetar">Resetar o placar</string>
+    <string name="inicio">Voltar a tela inicial</string>
+    <string name="preferencias">Preferências</string>
+    <string name="simb_jogador1">Simbolo do jogador 1</string>
+    <string name="simb_jogador2">Simbolo do jogador 2</string>
+    <string name="summary_jog1">Escolha o simbolo do jogador 1</string>
+    <string name="summary_jog2">Escolha o simbolo do jogador 2</string>
+    <string name="jogador_1">Jogador 1 |%1$s|</string>
+    <string name="jogador_2">Jogador 2 |%1$s|</string>
 </resources>
