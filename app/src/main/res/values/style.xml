@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="button" parent="TextAppearance.AppCompat">
+        <item name="android:backgroundTint">@color/bluezao</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">140dp</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:radius">20dp</item>
+        <item name="android:textSize">28sp</item>
+    </style>
+</resources>

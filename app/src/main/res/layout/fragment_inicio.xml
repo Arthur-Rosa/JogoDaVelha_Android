@@ -1,39 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/inicio_image"
     tools:context=".fragment.InicioFragment">
 
-    <TextView
-        android:id="@+id/tvTitulo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp"
-        android:textColor="@color/white"
-        android:text="@string/app_name"
-        android:textAlignment="center"
-        android:padding="20dp"
-        android:textSize="36dp"
-        android:background="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:fontFamily="cursive"/>
-
-    <LinearLayout
+    <Button
+        android:id="@+id/bt_jogar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitulo"
-        android:textAlignment="center" >
+        android:layout_marginTop="-180dp"
+        android:width="250dp"
+        android:fontFamily="sans-serif"
+        android:padding="5dp"
+        android:text="@string/iniciar"
+        android:textAlignment="center"
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"/>
-
-    </LinearLayout>
-
-
+        android:textSize="24dp"
+        android:textStyle="bold"
+        android:backgroundTint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

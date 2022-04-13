@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/jogoFragment">
+    app:startDestination="@id/inicioFragment">
 
     <fragment
         android:id="@+id/inicioFragment"
@@ -13,11 +13,14 @@
         <action
             android:id="@+id/action_inicioFragment_to_jogoFragment"
             app:destination="@id/jogoFragment" />
+        <action
+            android:id="@+id/action_inicioFragment_to_prefNameFragment"
+            app:destination="@id/prefNameFragment" />
     </fragment>
     <fragment
         android:id="@+id/jogoFragment"
         android:name="br.senai.sp.cotia.jogodavelha.fragment.JogoFragment"
-        android:label="fragment_jogo"
+        android:label=""
         tools:layout="@layout/fragment_jogo" >
         <action
             android:id="@+id/action_jogoFragment_to_inicioFragment"
@@ -25,10 +28,18 @@
         <action
             android:id="@+id/action_jogoFragment_to_prefFragment"
             app:destination="@id/prefFragment" />
+        <action
+            android:id="@+id/action_jogoFragment_to_prefNameFragment"
+            app:destination="@id/prefNameFragment" />
     </fragment>
     <fragment
         android:id="@+id/prefFragment"
         android:name="br.senai.sp.cotia.jogodavelha.fragment.PrefFragment"
-        android:label="fragment_pref"
+        android:label=""
         tools:layout="@layout/fragment_pref" />
+    <fragment
+        android:id="@+id/prefNameFragment"
+        android:name="br.senai.sp.cotia.jogodavelha.fragment.PrefNomeFragment"
+        android:label=""
+        tools:layout="@layout/fragment_name_pref"/>
 </navigation>

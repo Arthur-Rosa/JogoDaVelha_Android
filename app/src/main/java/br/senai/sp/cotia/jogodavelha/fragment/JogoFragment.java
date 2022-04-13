@@ -1,9 +1,12 @@
 package br.senai.sp.cotia.jogodavelha.fragment;
 
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -23,7 +26,9 @@ import java.util.List;
 import java.util.Random;
 
 import br.senai.sp.cotia.jogodavelha.R;
+import br.senai.sp.cotia.jogodavelha.databinding.FragmentInicioBinding;
 import br.senai.sp.cotia.jogodavelha.databinding.FragmentJogoBinding;
+import br.senai.sp.cotia.jogodavelha.util.PrefNameUtil;
 import br.senai.sp.cotia.jogodavelha.util.PrefsUtil;
 
 public class JogoFragment extends Fragment {
@@ -34,11 +39,11 @@ public class JogoFragment extends Fragment {
     // matriz de string do tabuuleiro
     private String[][] tabuleiro;
     // variaveis para as bolinha
-    private String simbJog1, simbJog2, simbolo;
+    private String simbJog1, simbJog2, simbolo, nameJog1, nameJog2;
     // variavel para indicar qual jogador inicia a partida
     private Random random;
     // variavel para controlar numero de jogadas
-    private int numJogadas = 0;
+    private int numJogadas = 0, numVelhas = 0;
     // variaveis para o placar
     private int placarJog1 = 0, placarJog2 = 0;
 
@@ -59,6 +64,7 @@ public class JogoFragment extends Fragment {
 
         // preenche matriz com string vazia
 
+
         for (String[] vetor : tabuleiro) {
             Arrays.fill(vetor, "");
         }
@@ -67,8 +73,11 @@ public class JogoFragment extends Fragment {
         simbJog1 = PrefsUtil.getSimboloJog1(getContext());
         simbJog2 = PrefsUtil.getSimboloJog2(getContext());
 
-        binding.text1.setText(getResources().getString(R.string.jogador_1,simbJog1));
-        binding.text2.setText(getResources().getString(R.string.jogador_2,simbJog2));
+        nameJog1 = PrefNameUtil.getName1(getContext());
+        nameJog2 = PrefNameUtil.getName2(getContext());
+
+        binding.text1.setText(getResources().getString(R.string.jogador_1, nameJog1, simbJog1));
+        binding.text2.setText(getResources().getString(R.string.jogador_2, nameJog2, simbJog2));
 
         // instanciar o random
         random = new Random();
@@ -100,9 +109,9 @@ public class JogoFragment extends Fragment {
         return binding.getRoot();
     }
 
-    private void atualizaPlacar(){
-        binding.placarUm.setText(placarJog1+"");
-        binding.placarDois.setText(placarJog2+"");
+    private void atualizaPlacar() {
+        binding.placarUm.setText(placarJog1 + "");
+        binding.placarDois.setText(placarJog2 + "");
     }
 
     private void sorteia() {
@@ -118,7 +127,8 @@ public class JogoFragment extends Fragment {
     private void reseta() {
         for (Button bt : botoes) {
             bt.setClickable(true);
-            bt.setBackgroundColor(getResources().getColor(R.color.black));
+            bt.setBackgroundColor(getResources().getColor(R.color.bluezao));
+            bt.setHintTextColor(getResources().getColor(R.color.bluezao));
             bt.setText("");
         }
 
@@ -137,12 +147,12 @@ public class JogoFragment extends Fragment {
         if (simbolo.equals(simbJog1)) {
             // simbolo = simbJog2;
 
-            binding.linearLayout.setBackgroundColor(getResources().getColor(R.color.gray));
-            binding.linearLayout2.setBackgroundColor(getResources().getColor(R.color.black));
+            binding.linearLayout.setBackgroundColor(getResources().getColor(R.color.white));
+            binding.linearLayout2.setBackgroundColor(getResources().getColor(R.color.bluezao));
 
             binding.text1.setTextColor(getResources().getColor(R.color.black));
             binding.text2.setTextColor(getResources().getColor(R.color.white));
-            binding.placarUm.setTextColor(getResources().getColor(R.color.black));
+            binding.placarUm.setTextColor(getResources().getColor(R.color.bluezao));
             binding.placarDois.setTextColor(getResources().getColor(R.color.white));
         } else {
             // simbolo = simbJog1;
@@ -152,8 +162,8 @@ public class JogoFragment extends Fragment {
             binding.placarUm.setTextColor(getResources().getColor(R.color.white));
             binding.placarDois.setTextColor(getResources().getColor(R.color.black));
 
-            binding.linearLayout.setBackgroundColor(getResources().getColor(R.color.black));
-            binding.linearLayout2.setBackgroundColor(getResources().getColor(R.color.gray));
+            binding.linearLayout.setBackgroundColor(getResources().getColor(R.color.bluezao));
+            binding.linearLayout2.setBackgroundColor(getResources().getColor(R.color.white));
         }
     }
 
@@ -180,114 +190,115 @@ public class JogoFragment extends Fragment {
         }
         return false;
     }
-/*
-    public void vezDoRobo() {
-        Log.w("entrou", "na vez do robo");
-        Random r = new Random();
-        numJogadas += 1;
-        simbolo = "O";
-        boolean z = false;
 
-        while (z != true) {
-            int linha = r.nextInt(3);
-            int coluna = r.nextInt(3);
+    /*
+        public void vezDoRobo() {
+            Log.w("entrou", "na vez do robo");
+            Random r = new Random();
+            numJogadas += 1;
+            simbolo = "O";
+            boolean z = false;
 
-            if (tabuleiro[linha][coluna].equals(simbolo)) {
-                Log.w("robo ja tem", "ja tem ja tem ja tem");
-                z = false;
-            } else {
+            while (z != true) {
+                int linha = r.nextInt(3);
+                int coluna = r.nextInt(3);
+
+                if (tabuleiro[linha][coluna].equals(simbolo)) {
+                    Log.w("robo ja tem", "ja tem ja tem ja tem");
+                    z = false;
+                } else {
 
 
 
-                tabuleiro[linha][coluna] = simbolo;
+                    tabuleiro[linha][coluna] = simbolo;
 
-                botoes[0] = binding.bt00;
-                botoes[1] = binding.bt01;
-                botoes[2] = binding.bt02;
-                botoes[3] = binding.bt10;
-                botoes[4] = binding.bt11;
-                botoes[5] = binding.bt12;
-                botoes[6] = binding.bt20;
-                botoes[7] = binding.bt21;
-                botoes[8] = binding.bt22;
+                    botoes[0] = binding.bt00;
+                    botoes[1] = binding.bt01;
+                    botoes[2] = binding.bt02;
+                    botoes[3] = binding.bt10;
+                    botoes[4] = binding.bt11;
+                    botoes[5] = binding.bt12;
+                    botoes[6] = binding.bt20;
+                    botoes[7] = binding.bt21;
+                    botoes[8] = binding.bt22;
 
-                if (tabuleiro[linha][coluna] == tabuleiro[0][0] && botoes[0].getText().equals("")) {
-                    Button botao = botoes[0];
-                    botao.setText(simbolo);
-                    botao.setTextColor(Color.BLACK);
-                    botao.setBackgroundColor(Color.RED);
-                    botao.setClickable(false);
+                    if (tabuleiro[linha][coluna] == tabuleiro[0][0] && botoes[0].getText().equals("")) {
+                        Button botao = botoes[0];
+                        botao.setText(simbolo);
+                        botao.setTextColor(Color.BLACK);
+                        botao.setBackgroundColor(Color.RED);
+                        botao.setClickable(false);
 
-                    z = true;
-                } else if (tabuleiro[linha][coluna] == tabuleiro[0][1] && botoes[1].getText().equals("")) {
-                    Button botao = botoes[1];
-                    botao.setText(simbolo);
-                    botao.setTextColor(Color.BLACK);
-                    botao.setBackgroundColor(Color.RED);
-                    botao.setClickable(false);
+                        z = true;
+                    } else if (tabuleiro[linha][coluna] == tabuleiro[0][1] && botoes[1].getText().equals("")) {
+                        Button botao = botoes[1];
+                        botao.setText(simbolo);
+                        botao.setTextColor(Color.BLACK);
+                        botao.setBackgroundColor(Color.RED);
+                        botao.setClickable(false);
 
-                    z = true;
-                } else if (tabuleiro[linha][coluna] == tabuleiro[0][2] && botoes[2].getText().equals("")) {
-                    Button botao = botoes[2];
-                    botao.setText(simbolo);
-                    botao.setTextColor(Color.BLACK);
-                    botao.setBackgroundColor(Color.RED);
-                    botao.setClickable(false);
+                        z = true;
+                    } else if (tabuleiro[linha][coluna] == tabuleiro[0][2] && botoes[2].getText().equals("")) {
+                        Button botao = botoes[2];
+                        botao.setText(simbolo);
+                        botao.setTextColor(Color.BLACK);
+                        botao.setBackgroundColor(Color.RED);
+                        botao.setClickable(false);
 
-                    z = true;
-                } else if (tabuleiro[linha][coluna] == tabuleiro[1][0] && botoes[3].getText().equals("")) {
-                    Button botao = botoes[3];
-                    botao.setText(simbolo);
-                    botao.setTextColor(Color.BLACK);
-                    botao.setBackgroundColor(Color.RED);
-                    botao.setClickable(false);
+                        z = true;
+                    } else if (tabuleiro[linha][coluna] == tabuleiro[1][0] && botoes[3].getText().equals("")) {
+                        Button botao = botoes[3];
+                        botao.setText(simbolo);
+                        botao.setTextColor(Color.BLACK);
+                        botao.setBackgroundColor(Color.RED);
+                        botao.setClickable(false);
 
-                    z = true;
-                } else if (tabuleiro[linha][coluna] == tabuleiro[1][1] && botoes[4].getText().equals("")) {
-                    Button botao = botoes[4];
-                    botao.setText(simbolo);
-                    botao.setTextColor(Color.BLACK);
-                    botao.setBackgroundColor(Color.RED);
-                    botao.setClickable(false);
+                        z = true;
+                    } else if (tabuleiro[linha][coluna] == tabuleiro[1][1] && botoes[4].getText().equals("")) {
+                        Button botao = botoes[4];
+                        botao.setText(simbolo);
+                        botao.setTextColor(Color.BLACK);
+                        botao.setBackgroundColor(Color.RED);
+                        botao.setClickable(false);
 
-                    z = true;
-                } else if (tabuleiro[linha][coluna] == tabuleiro[1][2] && botoes[5].getText().equals("")) {
-                    Button botao = botoes[5];
-                    botao.setText(simbolo);
-                    botao.setTextColor(Color.BLACK);
-                    botao.setBackgroundColor(Color.RED);
-                    botao.setClickable(false);
+                        z = true;
+                    } else if (tabuleiro[linha][coluna] == tabuleiro[1][2] && botoes[5].getText().equals("")) {
+                        Button botao = botoes[5];
+                        botao.setText(simbolo);
+                        botao.setTextColor(Color.BLACK);
+                        botao.setBackgroundColor(Color.RED);
+                        botao.setClickable(false);
 
-                    z = true;
-                } else if (tabuleiro[linha][coluna] == tabuleiro[2][0] && botoes[6].getText().equals("")) {
-                    Button botao = botoes[6];
-                    botao.setText(simbolo);
-                    botao.setTextColor(Color.BLACK);
-                    botao.setBackgroundColor(Color.RED);
-                    botao.setClickable(false);
+                        z = true;
+                    } else if (tabuleiro[linha][coluna] == tabuleiro[2][0] && botoes[6].getText().equals("")) {
+                        Button botao = botoes[6];
+                        botao.setText(simbolo);
+                        botao.setTextColor(Color.BLACK);
+                        botao.setBackgroundColor(Color.RED);
+                        botao.setClickable(false);
 
-                    z = true;
-                } else if (tabuleiro[linha][coluna] == tabuleiro[2][1] && botoes[7].getText().equals("")) {
-                    Button botao = botoes[7];
-                    botao.setText(simbolo);
-                    botao.setTextColor(Color.BLACK);
-                    botao.setBackgroundColor(Color.RED);
-                    botao.setClickable(false);
+                        z = true;
+                    } else if (tabuleiro[linha][coluna] == tabuleiro[2][1] && botoes[7].getText().equals("")) {
+                        Button botao = botoes[7];
+                        botao.setText(simbolo);
+                        botao.setTextColor(Color.BLACK);
+                        botao.setBackgroundColor(Color.RED);
+                        botao.setClickable(false);
 
-                    z = true;
-                } else if (tabuleiro[linha][coluna] == tabuleiro[2][2] && botoes[8].getText().equals("")) {
-                    Button botao = botoes[8];
-                    botao.setText(simbolo);
-                    botao.setTextColor(Color.BLACK);
-                    botao.setBackgroundColor(Color.RED);
-                    botao.setClickable(false);
+                        z = true;
+                    } else if (tabuleiro[linha][coluna] == tabuleiro[2][2] && botoes[8].getText().equals("")) {
+                        Button botao = botoes[8];
+                        botao.setText(simbolo);
+                        botao.setTextColor(Color.BLACK);
+                        botao.setBackgroundColor(Color.RED);
+                        botao.setClickable(false);
 
-                    z = true;
+                        z = true;
+                    }
                 }
             }
         }
-    }
-*/
+    */
     private View.OnClickListener listenerBotoes = btPress -> {
         // incrementa numero de jogadas
         numJogadas++;
@@ -306,7 +317,7 @@ public class JogoFragment extends Fragment {
         // "seta" o simbolo do botao pressionado
         botao.setText(simbolo);
         // troca o background para branco
-        botao.setBackgroundColor(Color.WHITE);
+        botao.setBackgroundColor(getResources().getColor(R.color.bluezao));
         // troca cor da letra para preto
         botao.setTextColor(Color.BLACK);
         // desabilita botao que foi jogado
@@ -317,7 +328,7 @@ public class JogoFragment extends Fragment {
             // informa que houve um vencedor
             Toast.makeText(getContext(), R.string.venceu, Toast.LENGTH_SHORT).show();
 
-            if(simbolo.equals(simbJog1)){
+            if (simbolo.equals(simbJog1)) {
                 placarJog1++;
             } else {
                 placarJog2++;
@@ -327,8 +338,10 @@ public class JogoFragment extends Fragment {
             // reseta
             reseta();
         } else if (numJogadas == 9) {
+            numVelhas += 1;
+            String s = getContext().getString(R.string.deuvelha) + " " + numVelhas;
             // informa que deu velha
-            Toast.makeText(getContext(), R.string.deuvelha, Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), s, Toast.LENGTH_LONG).show();
             // reseta
             reseta();
         } else {
@@ -345,7 +358,7 @@ public class JogoFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         // verificar qual opção foi selecionada
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             // caso seja o opção de resetar
             case R.id.menu_resetar:
                 placarJog2 = 0;
@@ -357,8 +370,66 @@ public class JogoFragment extends Fragment {
             case R.id.menu_pref:
                 NavHostFragment.findNavController(JogoFragment.this).navigate(R.id.action_jogoFragment_to_prefFragment);
                 break;
-        }
+            case R.id.menu_inicio:
+                NavHostFragment.findNavController(JogoFragment.this).navigate(R.id.action_jogoFragment_to_inicioFragment);
+                break;
+            case R.id.menu_resetar_tudo:
 
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this.getContext());
+                alertDialogBuilder.setTitle("ALERTA");
+                alertDialogBuilder.setMessage("Deseja resetar tudo ?");
+                alertDialogBuilder.setCancelable(false);
+
+                alertDialogBuilder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        nameJog1 = "Jogador 1";
+                        nameJog2 = "Jogador 2";
+                        simbJog1 = "X";
+                        simbJog2 = "O";
+                        placarJog2 = 0;
+                        placarJog1 = 0;
+                        atualizaPlacar();
+                        reseta();
+
+
+                        binding.text1.setText(getResources().getString(R.string.jogador_1, nameJog1, simbJog1));
+                        binding.text2.setText(getResources().getString(R.string.jogador_2, nameJog2, simbJog2));
+
+                        atualizaVez();
+                    }
+                });
+
+                alertDialogBuilder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // clicou não
+                    }
+                });
+                alertDialogBuilder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // cancelou
+                    }
+                });
+
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+                break;
+            case R.id.menu_nomes:
+                NavHostFragment.findNavController(JogoFragment.this).navigate(R.id.action_jogoFragment_to_prefNameFragment);
+                break;
+        }
         return true;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        AppCompatActivity minhaActivity = (AppCompatActivity) getActivity();
+        minhaActivity.getSupportActionBar().show();
+        minhaActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
     }
 }

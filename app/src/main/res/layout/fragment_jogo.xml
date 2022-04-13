@@ -5,24 +5,38 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/image_game"
     tools:context=".fragment.JogoFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Placar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textStyle="bold"
+        android:textColor="@color/bluezao"
+        android:textSize="24dp"/>
 
     <LinearLayout
         android:id="@+id/linearLayoutPrim"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:orientation="horizontal"
         android:padding="10dp"
         app:layout_constraintTop_toTopOf="parent">
 
+
+
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="82dp"
             android:layout_marginRight="1dp"
             android:layout_weight="1"
-            android:background="@drawable/placar_border_radius"
+            android:background="@drawable/quadrado_maior"
             android:orientation="vertical"
             android:padding="20dp"
             app:layout_constraintEnd_toStartOf="@+id/linearLayout2"
@@ -51,10 +65,10 @@
         <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="82dp"
             android:layout_marginLeft="1dp"
             android:layout_weight="1"
-            android:background="@drawable/placar_border_radius"
+            android:background="@drawable/quadrado_maior"
             android:orientation="vertical"
 
             android:padding="20dp"
@@ -65,7 +79,7 @@
             <TextView
                 android:id="@+id/text2"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="22dp"
                 android:layout_weight="1"
                 android:text="@string/jogador_2"
                 android:textAlignment="center"
@@ -84,8 +98,10 @@
     </LinearLayout>
 
     <TableLayout
+        android:layout_marginTop="-10dp"
+        android:padding="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="500dp"
         app:layout_constraintTop_toBottomOf="@+id/linearLayoutPrim">
 
         <TableRow
@@ -94,27 +110,15 @@
 
             <Button
                 android:id="@+id/bt00"
-                android:layout_width="0dp"
-                android:layout_height="150dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:textSize="20sp" />
+                style="@style/button" />
 
             <Button
                 android:id="@+id/bt01"
-                android:layout_width="0dp"
-                android:layout_height="150dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:textSize="20sp" />
+                style="@style/button" />
 
             <Button
                 android:id="@+id/bt02"
-                android:layout_width="0dp"
-                android:layout_height="150dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:textSize="20sp" />
+                style="@style/button" />
 
         </TableRow>
 
@@ -124,27 +128,15 @@
 
             <Button
                 android:id="@+id/bt10"
-                android:layout_width="0dp"
-                android:layout_height="150dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:textSize="20sp" />
+                style="@style/button" />
 
             <Button
                 android:id="@+id/bt11"
-                android:layout_width="0dp"
-                android:layout_height="150dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:textSize="20sp" />
+                style="@style/button" />
 
             <Button
                 android:id="@+id/bt12"
-                android:layout_width="0dp"
-                android:layout_height="150dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:textSize="20sp" />
+                style="@style/button" />
 
         </TableRow>
 
@@ -154,27 +146,15 @@
 
             <Button
                 android:id="@+id/bt20"
-                android:layout_width="0dp"
-                android:layout_height="150dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:textSize="20sp" />
+                style="@style/button" />
 
             <Button
                 android:id="@+id/bt21"
-                android:layout_width="0dp"
-                android:layout_height="150dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:textSize="20sp" />
+                style="@style/button" />
 
             <Button
                 android:id="@+id/bt22"
-                android:layout_width="0dp"
-                android:layout_height="150dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:textSize="20sp" />
+                style="@style/button" />
 
         </TableRow>
     </TableLayout>

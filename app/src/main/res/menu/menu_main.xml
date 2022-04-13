@@ -20,4 +20,16 @@
         android:orderInCategory="100"
         android:title="@string/preferencias"
         app:showAsAction="never" />
+    <item
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:id="@+id/menu_nomes"
+        android:orderInCategory="100"
+        android:title="@string/nomes_menu"
+        app:showAsAction="never" />
+    <item
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:id="@+id/menu_resetar_tudo"
+        android:orderInCategory="100"
+        android:title="@string/deletar"
+        app:showAsAction="never" />
 </menu>

@@ -13,6 +13,11 @@
     <string name="simb_jogador2">Simbolo do jogador 2</string>
     <string name="summary_jog1">Escolha o simbolo do jogador 1</string>
     <string name="summary_jog2">Escolha o simbolo do jogador 2</string>
-    <string name="jogador_1">Jogador 1 |%1$s|</string>
-    <string name="jogador_2">Jogador 2 |%1$s|</string>
+    <string name="jogador_1">%1$s |%2$s|</string>
+    <string name="jogador_2">%1$s |%2$s|</string>
+    <string name="iniciar">Jogar</string>
+    <string name="escolha_nome1">Escolha o nome do jogador 1</string>
+    <string name="escolha_nome2">Escolha o nome do jogador 2</string>
+    <string name="deletar">Resetar</string>
+    <string name="nomes_menu">Nomes</string>
 </resources>

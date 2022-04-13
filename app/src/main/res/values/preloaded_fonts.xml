@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/</item>
+        <item>@font/baloo</item>
+        <item>@font/grand_hotel</item>
+        <item>@font/grenze_thin</item>
+        <item>@font/saira_stencil_one</item>
+    </array>
+</resources>
